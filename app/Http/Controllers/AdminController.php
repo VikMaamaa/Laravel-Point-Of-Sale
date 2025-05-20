@@ -29,6 +29,9 @@ class AdminController extends Controller
    }//End Method
 
    public function AdminProfileStore(Request $request) {
+
+
+
         $id = Auth::user()->id;
         $data = User::find($id);
         $data->name = $request->name;
@@ -47,7 +50,14 @@ class AdminController extends Controller
 
         $data->save();
 
-        return redirect()->back();
+        $notification = array(
+            'message' => 'Admin Profile Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+
+
+        return redirect()->back()->with($notification);
 
    }//End Method
 }
